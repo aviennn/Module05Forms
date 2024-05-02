@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Module05Forms.PersonalInfoPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+
+            <Label Text ="Fill up the form:" 
+                   FontSize="Large" 
+                   FontAttributes="Bold" 
+                   VerticalOptions="CenterAndExpand">
+            </Label>
+            
+            <Entry Placeholder="First Name" />
+    
+           
+            <Grid ColumnDefinitions="*,Auto">
+                
+                <Switch x:Name="middleNameSwitch" IsToggled="True" 
+                        Grid.Column="1"
+                        >
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="CommonState">
+                            <VisualState x:Name="On">
+                                <VisualState.Setters>
+                                    <Setter Property="ThumbColor" Value="Green" />
+                                    <Setter Property="OnColor" Value="Black" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Off">
+                                <VisualState.Setters>
+                                    <Setter Property="ThumbColor" Value="Red" />
+                                    <Setter Property="OnColor" Value="Gray" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                </Switch>
+
+               
+                <Entry IsEnabled="False" Placeholder="Middle Name" 
+                       Grid.Column="0"
+                       VerticalOptions="CenterAndExpand">
+                    <Entry.Triggers>
+                        <DataTrigger TargetType="Entry" Binding="{Binding Source={x:Reference middleNameSwitch}, Path=IsToggled}" Value="True">
+                            <Setter Property="IsEnabled" Value="True" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+            </Grid>
+
+            
+            <Entry Placeholder="Last Name" />
+
+            
+            <Picker Title="Gender">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Male</x:String>
+                        <x:String>Female</x:String>
+                        <x:String>Other</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            
+            <Label Text="Birthdate:" 
+                   FontSize="Medium" 
+                   FontAttributes="Bold"
+                   VerticalOptions="CenterAndExpand"/>
+            <DatePicker Format="D" DateSelected="OnDateSelected" x:Name="birthDatePicker" />
+
+            <Label x:Name="ageComputation" 
+                   Text="Age:"
+                   FontSize="Medium" 
+                   FontAttributes="Bold" 
+                   VerticalOptions="CenterAndExpand"/>
+
+           
+            <Entry Placeholder="Address" />
+            <Entry Placeholder="Contact Number" Keyboard="Telephone" />
+            <Entry Placeholder="Email" Keyboard="Email" />
+            <Entry Placeholder="Username" />
+            <Entry Placeholder="Password" IsPassword="True" />
+            <Entry Placeholder="Repeat Password" IsPassword="True" />
+
+            
+            <Button Text="Submit" Clicked="OnSubmitClicked" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
